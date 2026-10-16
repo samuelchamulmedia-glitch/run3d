@@ -1,0 +1,11 @@
+# Typography, activity time and final hold
+
+Typography is an independent Activity data setting. Modern Sans, Compact Sans, Soft Sans and Bold Sans use local sans-serif font stacks only, in both preview and export. Route themes no longer force serif or monospace overlays. Exact local faces depend on installed fonts.
+
+Video duration includes the Final data hold (0, 2 or 4 seconds). The default hold is 2 seconds. For example, a 15-second clip with a 4-second hold animates over 11 seconds, then freezes the completed route, camera and final metrics. Hold uses the shared simulation for preview/export and does not change the encoded duration or 30fps timing.
+
+Total time is separate from the animated elapsed counter and the compressed video length. It prefers recorded elapsed summary, then nondecreasing first-to-last source timestamps, then a recorded timer summary or complete recorded lap durations. Timer-based fallbacks are labelled Total timer time because they can exclude pauses. The source of the value is disclosed beside the data controls. Missing time remains missing, not zero and not video duration.
+
+Actual Timing now ignores redundant GPS records only when timestamp, position and segment are identical. All source samples and their sensor values remain preserved. Missing GPS timestamps and out-of-order clocks still disable Actual Timing. Conflicting positions at the same time now replay in source order as instantaneous jumps, selecting the last position at that timestamp. No distance or connecting route geometry is added across the jump. Pace is suppressed for the following five recorded seconds, including source-speed readings, so no pace window crosses an ambiguous position change. The UI gives counts and an explicit Uniform Speed button; it never silently fabricates or sorts a running timeline. A FIT import with reliable timestamps is preferred for a damaged TCX/GPX clock.
+
+Validation: 116 unit tests, strict TypeScript and production build passed. Regression tests cover harmless versus conflicting duplicates, total elapsed/timer provenance, independent sans-serif choices, and exact route/camera/metric equality throughout both hold lengths including the last encoded-frame timestamp.

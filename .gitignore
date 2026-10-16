@@ -1,0 +1,20 @@
+node_modules/
+.pnpm-store/
+.test-store/
+dist/
+evidence/
+work/
+private/
+private-fixtures/
+.runmotion-backup-*/
+*.local
+.env
+.env.*
+.DS_Store
+# Never commit private activity imports or generated health/location media.
+*.gpx
+*.tcx
+*.fit
+!tests/fixtures/synthetic.fit
+*.mp4
+*.webm
